@@ -1,7 +1,9 @@
 /*
-    File uma.h
+    File Uma.h
     By WzrterFX
 */
+
+#pragma once
 
 #ifndef UMA_H
 #define UMA_H
@@ -33,7 +35,7 @@ namespace Uma {
         std::uint32_t _processId;
 
         typedef struct __AttachRequest {
-            std::uint32_t processId;
+            HANDLE process;
         } AttachRequest, * PAttachRequest;
 
         typedef struct __CopyMemoryRequest {

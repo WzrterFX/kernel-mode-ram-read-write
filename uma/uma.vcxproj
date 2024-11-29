@@ -16,6 +16,7 @@
     <ProjectGuid>{0ba1a651-d6f4-48b6-9c85-0669fb421ea8}</ProjectGuid>
     <RootNamespace>uma</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Uma</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -44,12 +45,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)build\</OutDir>
+    <OutDir>$(SolutionDir)Build\</OutDir>
     <IntDir>$(SolutionDir).vs\$(ProjectName)\</IntDir>
     <TargetName>$(TargetName.Replace(' ',''))</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)build\</OutDir>
+    <OutDir>$(SolutionDir)Build\</OutDir>
     <IntDir>$(SolutionDir).vs\$(ProjectName)\</IntDir>
     <TargetName>$(TargetName.Replace(' ',''))</TargetName>
   </PropertyGroup>
@@ -89,11 +90,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="uma.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Uma.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="uma.h" />
+    <ClInclude Include="Uma.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

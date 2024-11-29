@@ -1,4 +1,9 @@
-#include "uma.h"
+/*
+    File Uma.cpp
+    By WzrterFX
+*/
+
+#include "Uma.h"
 
 namespace Uma {
     Uma::Uma() : _kmdHandle(nullptr, &CloseHandle), _processId(NULL) {
@@ -44,7 +49,7 @@ namespace Uma {
             );
 
         KmdRequest request;
-        request.attachRequest.processId = _processId;
+        request.attachRequest.process = reinterpret_cast<HANDLE>(_processId);
 
         if (!DeviceIoControl(
             _kmdHandle.get(), ::Uma::_IoCtls::attach,

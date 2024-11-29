@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "uma.h"
+#include "Uma.h"
 
 int main(void) {
     Uma::Uma* uma { };
@@ -8,13 +8,20 @@ int main(void) {
     try {
         uma = new Uma::Uma();
 
-        uma->Attach(L"");
+        uma->Attach(L"Example.exe");
     }
     catch (const std::exception& exeption) {
-        MessageBox(nullptr,
-            exeption.what(), "Error", MB_OK | MB_ICONERROR | MB_TOPMOST
-        );
+        std::cerr << exeption.what() << std::endl;
+        
+        std::cin.get();
 
-        return EXIT_FAILURE;
+        if (uma)
+            delete uma;
+
+        return -1;
     }
+
+    delete uma;
+
+    return 0;
 }

@@ -1,13 +1,16 @@
 /*
-*   File Kmd.h
-*   By WzrterFX
+    File Kmd.h
+    By WzrterFX
 */
 
-#ifndef KDM_H
-#define KDM_H
+#pragma once
+
+#ifndef KMD_H
+#define KMD_H
+
+#include <cstdint>
 
 #include <ntifs.h>
-#include <cstdint>
 
 namespace Kmd {
     namespace _NtifsApi {
@@ -22,9 +25,9 @@ namespace Kmd {
             NTSTATUS __stdcall
             PsLookupProcessByProcessId(
                 IN  HANDLE      ProcessId,
-                OUT PEPROCESS*  Process
+                OUT PEPROCESS* Process
             );
-        
+
         extern "C" __declspec(dllimport)
             NTSTATUS __stdcall
             MmCopyVirtualMemory(
@@ -57,7 +60,7 @@ namespace Kmd {
         PDEVICE_OBJECT _deviceObject;
 
         typedef struct __AttachRequest {
-            std::uint32_t processId;
+            HANDLE process;
         } AttachRequest, * PAttachRequest;
 
         typedef struct __CopyMemoryRequest {
@@ -76,4 +79,4 @@ namespace Kmd {
     };
 }
 
-#endif /* !KDM_H */
+#endif /* !KMD_H */

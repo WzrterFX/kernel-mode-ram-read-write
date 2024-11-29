@@ -1,7 +1,7 @@
-#include "kmd.h"
+#include "Kmd.h"
 
 NTSTATUS KmdMain(PDRIVER_OBJECT DriverObject, PUNICODE_STRING) {
-	Kmd::Kmd kmd;
+	Kmd::Kmd kmd { };
 
 	return kmd.Create(DriverObject);
 }
@@ -12,7 +12,7 @@ NTSTATUS KmdLoad() {
 	UNICODE_STRING driverName { };
 	RtlInitUnicodeString(&driverName, L"\\Driver\\Kmd");
 
-	status = ::Kmd::_NtifsApi::IoCreateDriver(&driverName, KmdMain);
+	status = Kmd::_NtifsApi::IoCreateDriver(&driverName, KmdMain);
 	if (!NT_SUCCESS(status))
 		DbgPrintEx(0, 0,
 			"Fatal, failed create driver, service is running or loaded incorrect.\n"

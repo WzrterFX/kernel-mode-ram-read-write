@@ -19,6 +19,7 @@
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
     <RootNamespace>kmd</RootNamespace>
     <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
+    <ProjectName>Kmd</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -50,13 +51,13 @@
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
-    <OutDir>$(SolutionDir)build\</OutDir>
+    <OutDir>$(SolutionDir)Build\</OutDir>
     <IntDir>$(SolutionDir).vs\$(ProjectName)\</IntDir>
     <EnableInf2cat>false</EnableInf2cat>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
-    <OutDir>$(SolutionDir)build\</OutDir>
+    <OutDir>$(SolutionDir)Build\</OutDir>
     <IntDir>$(SolutionDir).vs\$(ProjectName)\</IntDir>
     <EnableInf2cat>false</EnableInf2cat>
   </PropertyGroup>
@@ -79,6 +80,16 @@
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
       <EntryPointSymbol>KmdLoad</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>if exist "$(SolutionDir)Build\$(ProjectName)" (
+    rmdir /s /q "$(SolutionDir)Build\$(ProjectName)"
+)
+
+for /f "usebackq delims=" %%f in (`dir /b /s "$(SolutionDir)Build\*.pdb"`) do (
+    del /q "%%f"
+)
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DriverSign>
@@ -102,16 +113,26 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EntryPointSymbol>KmdLoad</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>if exist "$(SolutionDir)Build\$(ProjectName)" (
+    rmdir /s /q "$(SolutionDir)Build\$(ProjectName)"
+)
+
+for /f "usebackq delims=" %%f in (`dir /b /s "$(SolutionDir)Build\*.pdb"`) do (
+    del /q "%%f"
+)
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="kmd.h" />
+    <ClInclude Include="Kmd.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="kmd.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Kmd.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

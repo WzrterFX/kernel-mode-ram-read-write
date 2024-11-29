@@ -1,9 +1,9 @@
 /*
-	File Mkmd.cpp
+	File Kmd.cpp
 	By WzrterFX
 */
 
-#include "kmd.h"
+#include "Kmd.h"
 
 namespace Kmd {
 	NTSTATUS Kmd::Create(PDRIVER_OBJECT driverObject) {
@@ -24,7 +24,7 @@ namespace Kmd {
 			return status;
 		}
 
-		UNICODE_STRING symbolicLink{ };
+		UNICODE_STRING symbolicLink { };
 		RtlInitUnicodeString(&symbolicLink, L"\\DosDevices\\Kmd");
 
 		status = IoCreateSymbolicLink(&symbolicLink, &deviceName);
@@ -90,7 +90,7 @@ namespace Kmd {
 		switch (stack->Parameters.DeviceIoControl.IoControlCode) {
 			case ::Kmd::_IoCtls::attach: {
 				status = ::Kmd::_NtifsApi::PsLookupProcessByProcessId(
-					reinterpret_cast<HANDLE>(request->attachRequest.processId), &process
+					request->attachRequest.process, &process
 				);
 
 				break;
